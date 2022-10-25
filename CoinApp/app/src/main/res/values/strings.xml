@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">CoinApp</string>
+    <string name="app_name">Kolikko Appis</string>
+    <string name="coin_name">Krypton nimi:</string>
+    <string name="coin_price">Nykyinen kurssi:</string>
+    <string name="type_name">kirjoita krypton nimi</string>
+    <string name="fetch">NOUDA KURSSI</string>
+    <string name="settings">ASETUKSET</string>
+    <string name="eur" translatable="false">EUR</string>
+    <string name="usd" translatable="false">USD</string>
+    <string name="choose">Valitse valuutta</string>
+    <string name="error">Virhe noudettaessa tietoja. Todennäköisesti virheellinen valuutan nimi.</string>
 </resources>

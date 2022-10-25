@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Coin App</string>
+    <string name="coin_name">Currency name:</string>
+    <string name="coin_price">Current price:</string>
+    <string name="type_name">type crypto name</string>
+    <string name="fetch">FETCH PRICE</string>
+    <string name="settings">SETTINGS</string>
+    <string name="choose">Choose currency</string>
+    <string name="error">Error in retrieving data. Propably faulty currency name</string>
+</resources>
