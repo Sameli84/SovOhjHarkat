@@ -33,9 +33,7 @@ public class MainActivity extends AppCompatActivity {
             mCurrency = getIntent().getStringExtra("CURRENCY");
             System.out.println("Hello from intent");
         }
-
         mQueue = Volley.newRequestQueue(this);
-
         if(savedInstanceState != null) {
             mLatestPrice = savedInstanceState.getString("LATEST_PRICE");
             mLatestName = savedInstanceState.getString("LATEST_NAME");
@@ -45,55 +43,48 @@ public class MainActivity extends AppCompatActivity {
         coinTextView.setText(mLatestName);
         TextView coinPrice = findViewById(R.id.coinPrice);
         coinPrice.setText(mLatestPrice + " " + mCurrency);
-
     }
-
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-
         savedInstanceState.putString("LATEST_PRICE", mLatestPrice);
         savedInstanceState.putString("LATEST_NAME", mLatestName);
         super.onSaveInstanceState(savedInstanceState);
     }
 
     public void fetchCoinData(View view) {
-        TextView textView = (TextView) findViewById(R.id.cryptoUrl);
+        TextView textView = findViewById(R.id.cryptoUrl);
         String cryptoUrl = textView.getText().toString();
         String mCryptoUrl = mUrl+cryptoUrl;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
                 mCryptoUrl,
                 null,
                 response -> {
-                    System.out.println("Here");
                     // Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
                     parseJsonAndUpdateUi( response );
                 },
                 error -> {
                     error.printStackTrace();
-                    TextView errorTextView = (TextView) findViewById(R.id.errorTextView);
+                    TextView errorTextView = findViewById(R.id.errorTextView);
                     errorTextView.setText(getResources().getString(R.string.error));
-                }
-
-        );
+                });
         mQueue.add(jsonObjectRequest);
         System.out.println(mQueue.toString());
     }
 
     private void parseJsonAndUpdateUi(JSONObject coinObject) {
-        TextView coinTextView = (TextView) findViewById(R.id.coinTextView);
-        TextView priceTextView = (TextView) findViewById(R.id.coinPrice);
+        TextView coinTextView = findViewById(R.id.coinTextView);
+        TextView priceTextView = findViewById(R.id.coinPrice);
         try {
             String coin = coinObject.getString("name");
-            String price = coinObject.getJSONObject("market_data").getJSONObject("current_price").getString(mCurrency);
+            String price = coinObject.getJSONObject("market_data").
+                    getJSONObject("current_price").getString(mCurrency);
             System.out.println(price);
             coinTextView.setText(coin);
             priceTextView.setText(price + " " + mCurrency);
             mLatestPrice = price;
             mLatestName = coin;
-            TextView errorTextView = (TextView) findViewById(R.id.errorTextView);
+            TextView errorTextView = findViewById(R.id.errorTextView);
             errorTextView.setText("");
-
-            System.out.println("täällä");
         } catch (JSONException e) {
             e.printStackTrace();
             System.out.println("Virhe");
